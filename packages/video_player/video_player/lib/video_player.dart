@@ -334,6 +334,10 @@ class VideoPlayerController extends ValueNotifier<VideoPlayerValue> {
 
   @override
   Future<void> dispose() async {
+    if (_isDisposed) {
+      return;
+    }
+
     if (_creatingCompleter != null) {
       await _creatingCompleter.future;
       if (!_isDisposed) {
@@ -456,6 +460,7 @@ class VideoPlayerController extends ValueNotifier<VideoPlayerValue> {
     } else if (position < const Duration()) {
       position = const Duration();
     }
+
     await _videoPlayerPlatform.seekTo(_textureId, position);
     _updatePosition(position);
   }
