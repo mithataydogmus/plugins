@@ -44,11 +44,6 @@ final class VideoPlayer {
   private static final String FORMAT_HLS = "hls";
   private static final String FORMAT_OTHER = "other";
 
-  private static final float bandwidthFraction = .8f;
-  private static final int minDurationForQualityIncreaseMs = 1000;
-  private static final int minDurationForQualityDecreaseMs = 2000;
-  private static final int minDurationToRetainAfterDiscardMs = 2000;
-
   private SimpleExoPlayer exoPlayer;
 
   private Surface surface;
@@ -74,16 +69,8 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    AdaptiveTrackSelection.Factory trackSelectionFactory =
-         new AdaptiveTrackSelection.Factory(
-             minDurationForQualityIncreaseMs,
-             minDurationForQualityDecreaseMs,
-             minDurationToRetainAfterDiscardMs,
-             bandwidthFraction);
-
-    DefaultTrackSelector trackSelector = new DefaultTrackSelector(context, trackSelectionFactory);
-    
-    exoPlayer = new SimpleExoPlayer.Builder(context).setTrackSelector(trackSelector).build();
+    TrackSelector trackSelector = new DefaultTrackSelector();
+    exoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
 
     Uri uri = Uri.parse(dataSource);
 
@@ -152,6 +139,7 @@ final class VideoPlayer {
             .createMediaSource(MediaItem.fromUri(uri));
       case C.TYPE_HLS:
         return new HlsMediaSource.Factory(mediaDataSourceFactory)
+            .setAllowChunklessPreparation(true)
             .createMediaSource(MediaItem.fromUri(uri));
       case C.TYPE_OTHER:
         return new ProgressiveMediaSource.Factory(mediaDataSourceFactory)
