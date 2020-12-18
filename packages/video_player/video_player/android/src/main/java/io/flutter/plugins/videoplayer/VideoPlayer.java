@@ -67,7 +67,6 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    TrackSelector trackSelector = new DefaultTrackSelector();
     exoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
 
     Uri uri = Uri.parse(dataSource);
