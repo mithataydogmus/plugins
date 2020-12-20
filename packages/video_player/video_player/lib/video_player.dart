@@ -334,10 +334,6 @@ class VideoPlayerController extends ValueNotifier<VideoPlayerValue> {
 
   @override
   Future<void> dispose() async {
-    if (_isDisposed) {
-      return;
-    }
-
     if (_creatingCompleter != null) {
       await _creatingCompleter.future;
       if (!_isDisposed) {
