@@ -67,7 +67,16 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    exoPlayer = new SimpleExoPlayer.Builder(context).build();
+    LoadControl loadControl = new DefaultLoadControl(
+          new DefaultAllocator(true, 16),
+          VideoPlayerConfig.MIN_BUFFER_DURATION,
+          VideoPlayerConfig.MAX_BUFFER_DURATION,
+          VideoPlayerConfig.MIN_PLAYBACK_START_BUFFER,
+          VideoPlayerConfig.MIN_PLAYBACK_RESUME_BUFFER, -1, true);
+
+    exoPlayer = new SimpleExoPlayer.Builder(context)
+                                    .setLoadControl(loadControl)
+                                    .build();
 
     Uri uri = Uri.parse(dataSource);
 
@@ -136,7 +145,6 @@ final class VideoPlayer {
             .createMediaSource(MediaItem.fromUri(uri));
       case C.TYPE_HLS:
         return new HlsMediaSource.Factory(mediaDataSourceFactory)
-            .setAllowChunklessPreparation(true)
             .createMediaSource(MediaItem.fromUri(uri));
       case C.TYPE_OTHER:
         return new ProgressiveMediaSource.Factory(mediaDataSourceFactory)
