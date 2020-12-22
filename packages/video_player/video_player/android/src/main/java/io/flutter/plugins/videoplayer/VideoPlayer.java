@@ -67,16 +67,7 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    LoadControl loadControl = new DefaultLoadControl(
-          new DefaultAllocator(true, 16),
-          VideoPlayerConfig.MIN_BUFFER_DURATION,
-          VideoPlayerConfig.MAX_BUFFER_DURATION,
-          VideoPlayerConfig.MIN_PLAYBACK_START_BUFFER,
-          VideoPlayerConfig.MIN_PLAYBACK_RESUME_BUFFER, -1, true);
-
-    exoPlayer = new SimpleExoPlayer.Builder(context)
-                                    .setLoadControl(loadControl)
-                                    .build();
+    exoPlayer = new SimpleExoPlayer.Builder(context).build();
 
     Uri uri = Uri.parse(dataSource);
 
