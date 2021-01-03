@@ -229,6 +229,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
   };
 
   _player = [AVPlayer playerWithPlayerItem:item];
+  _player.currentItem.preferredForwardBufferDuration = 10;
   _player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
 
   [self createVideoOutputAndDisplayLink:frameUpdater];
