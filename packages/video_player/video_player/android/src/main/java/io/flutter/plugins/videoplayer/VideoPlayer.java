@@ -67,7 +67,7 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    LoadControl loadControl = new DefaultLoadControl(
+    DefaultLoadControl loadControl = new DefaultLoadControl(
           new DefaultAllocator(true, 16),
           4000,
           12000,
