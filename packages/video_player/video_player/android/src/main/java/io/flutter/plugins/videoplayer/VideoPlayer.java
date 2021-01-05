@@ -74,7 +74,7 @@ final class VideoPlayer {
                       12000,
                       2000,
                       3000
-                  );
+                  ).createDefaultLoadControl();
     
     exoPlayer = new SimpleExoPlayer.Builder(context)
                     .setLoadControl(loadControl)
