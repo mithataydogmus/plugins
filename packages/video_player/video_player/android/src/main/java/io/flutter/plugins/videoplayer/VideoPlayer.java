@@ -68,13 +68,13 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    DefaultLoadControl loadControl = new DefaultLoadControl(
-          new DefaultAllocator(true, 16),
-          4000,
-          12000,
-          2000,
-          3000, -1, true
-    );
+    LoadControl loadControl = new DefaultLoadControl.Builder()
+                  .setBufferDurationsMs(
+                      5000,
+                      12000,
+                      2000,
+                      3000)
+                  .createDefaultLoadControl();
     
     exoPlayer = new SimpleExoPlayer.Builder(context)
                     .setLoadControl(loadControl)
