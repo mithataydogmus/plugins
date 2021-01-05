@@ -67,7 +67,15 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    exoPlayer = new SimpleExoPlayer.Builder(context).build();
+    LoadControl loadControl = new DefaultLoadControl(
+          new DefaultAllocator(true, 16),
+          4000,
+          12000,
+          2000,
+          3000, -1, true
+    );
+    
+    exoPlayer = ExoPlayerFactory.newSimpleInstance(context, new DefaultRenderersFactory(this), new DefaultTrackSelector(), loadControl);
 
     Uri uri = Uri.parse(dataSource);
 
