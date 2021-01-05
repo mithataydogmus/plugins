@@ -75,7 +75,9 @@ final class VideoPlayer {
           3000, -1, true
     );
     
-    exoPlayer = ExoPlayerFactory.newSimpleInstance(context, new DefaultRenderersFactory(this), new DefaultTrackSelector(), loadControl);
+    exoPlayer = new SimpleExoPlayer.Builder(context)
+                    .setLoadControl(loadControl)
+                    .build();
 
     Uri uri = Uri.parse(dataSource);
 
