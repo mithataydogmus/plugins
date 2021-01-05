@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.view.Surface;
 import com.google.android.exoplayer2.C;
-import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.MediaItem;
@@ -67,18 +66,8 @@ final class VideoPlayer {
     this.eventChannel = eventChannel;
     this.textureEntry = textureEntry;
     this.options = options;
-
-    DefaultLoadControl loadControl = new DefaultLoadControl.Builder()
-                  .setBufferDurationsMs(
-                      5000,
-                      12000,
-                      2000,
-                      3000
-                  ).createDefaultLoadControl();
     
-    exoPlayer = new SimpleExoPlayer.Builder(context)
-                    .setLoadControl(loadControl)
-                    .build();
+    exoPlayer = new SimpleExoPlayer.Builder(context).build();
 
     Uri uri = Uri.parse(dataSource);
 
