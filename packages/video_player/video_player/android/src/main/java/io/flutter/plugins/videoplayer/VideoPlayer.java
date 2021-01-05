@@ -68,7 +68,7 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    LoadControl loadControl = new DefaultLoadControl.Builder()
+    DefaultLoadControl loadControl = new DefaultLoadControl.Builder()
                   .setBufferDurationsMs(
                       5000,
                       12000,
