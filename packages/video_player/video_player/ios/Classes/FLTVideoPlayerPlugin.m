@@ -353,13 +353,6 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
       toleranceBefore:kCMTimeZero
        toleranceAfter:kCMTimeZero];
   
-  if (_isPlaying) {
-    [_player pause];
-    [_player play];
-  } else {
-    [_player play];
-    [_player pause];
-  }
 }
 
 - (void)setIsLooping:(bool)isLooping {
