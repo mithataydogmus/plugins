@@ -45,8 +45,7 @@ abstract class VideoPlayerPlatform {
       try {
         instance._verifyProvidesDefaultImplementations();
       } on NoSuchMethodError catch (_) {
-        throw AssertionError(
-            'Platform interfaces must not be implemented with `implements`');
+        throw AssertionError('Platform interfaces must not be implemented with `implements`');
       }
     }
     _instance = instance;
@@ -118,6 +117,10 @@ abstract class VideoPlayerPlatform {
   /// Sets the audio mode to mix with other sources
   Future<void> setMixWithOthers(bool mixWithOthers) {
     throw UnimplementedError('setMixWithOthers() has not been implemented.');
+  }
+
+  Future<void> setPictureInPicture(int textureId, bool enabled, double left, double top, double width, double height) {
+    throw UnimplementedError('setPictureInPictureVideo() has not been implemented.');
   }
 
   // This method makes sure that VideoPlayer isn't implemented with `implements`.
@@ -252,11 +255,7 @@ class VideoEvent {
   }
 
   @override
-  int get hashCode =>
-      eventType.hashCode ^
-      duration.hashCode ^
-      size.hashCode ^
-      buffered.hashCode;
+  int get hashCode => eventType.hashCode ^ duration.hashCode ^ size.hashCode ^ buffered.hashCode;
 }
 
 /// Type of the event.
@@ -281,6 +280,12 @@ enum VideoEventType {
 
   /// An unknown event has been received.
   unknown,
+
+  /// The video starting to picture in picture.
+  startingPiP,
+
+  /// The video stopped to picture in picture.
+  stoppedPiP,
 }
 
 /// Describes a discrete segment of time within a video using a [start] and
@@ -333,10 +338,7 @@ class DurationRange {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DurationRange &&
-          runtimeType == other.runtimeType &&
-          start == other.start &&
-          end == other.end;
+      other is DurationRange && runtimeType == other.runtimeType && start == other.start && end == other.end;
 
   @override
   int get hashCode => start.hashCode ^ end.hashCode;

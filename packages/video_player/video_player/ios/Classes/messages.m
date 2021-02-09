@@ -24,6 +24,10 @@ static NSDictionary *wrapResult(NSDictionary *result, FlutterError *error) {
 + (FLTTextureMessage *)fromMap:(NSDictionary *)dict;
 - (NSDictionary *)toMap;
 @end
+@interface FLTPictureInPictureMessage ()
++ (FLTPictureInPictureMessage *)fromMap:(NSDictionary *)dict;
+- (NSDictionary *)toMap;
+@end
 @interface FLTCreateMessage ()
 + (FLTCreateMessage *)fromMap:(NSDictionary *)dict;
 - (NSDictionary *)toMap;
@@ -199,6 +203,49 @@ static NSDictionary *wrapResult(NSDictionary *result, FlutterError *error) {
 }
 @end
 
+@implementation FLTPictureInPictureMessage
+ + (FLTPictureInPictureMessage *)fromMap:(NSDictionary *)dict {
+     FLTPictureInPictureMessage *result = [[FLTPictureInPictureMessage alloc] init];
+     result.textureId = dict[@"textureId"];
+     if ((NSNull *)result.textureId == [NSNull null]) {
+         result.textureId = nil;
+     }
+     result.enabled = dict[@"enabled"];
+     if ((NSNull *)result.enabled == [NSNull null]) {
+        result.enabled = 0;
+     }
+     result.left = dict[@"left"];
+     if ((NSNull *)result.left == [NSNull null]) {
+         result.left = nil;
+     }
+     result.top = dict[@"top"];
+     if ((NSNull *)result.top == [NSNull null]) {
+         result.top = nil;
+     }
+     result.width = dict[@"width"];
+     if ((NSNull *)result.width == [NSNull null]) {
+         result.width = nil;
+     }
+     result.height = dict[@"height"];
+     if ((NSNull *)result.height == [NSNull null]) {
+         result.height = nil;
+     }
+     return result;
+ }
+
+ - (NSDictionary *)toMap {
+    return [NSDictionary
+            dictionaryWithObjectsAndKeys:(self.textureId != nil ? self.textureId : [NSNull null]),
+            @"textureId", (self.enabled),
+            @"enabled", (self.left != nil ? self.left : [NSNull null]),
+            @"left", (self.top != nil ? self.top : [NSNull null]),
+            @"top", (self.width != nil ? self.width : [NSNull null]),
+            @"width", (self.height != nil ? self.height : [NSNull null]),
+            @"height", nil];
+ }
+}
+@end
+
 void FLTVideoPlayerApiSetup(id<FlutterBinaryMessenger> binaryMessenger, id<FLTVideoPlayerApi> api) {
   {
     FlutterBasicMessageChannel *channel = [FlutterBasicMessageChannel
@@ -362,6 +409,21 @@ void FLTVideoPlayerApiSetup(id<FlutterBinaryMessenger> binaryMessenger, id<FLTVi
       }];
     } else {
       [channel setMessageHandler:nil];
+    }
+  }
+  {
+  FlutterBasicMessageChannel *channel = [FlutterBasicMessageChannel
+                                          messageChannelWithName:@"dev.flutter.pigeon.VideoPlayerApi.setPictureInPicture"
+                                          binaryMessenger:binaryMessenger];
+    if (api) {
+       [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
+           FlutterError *error;
+           FLTPictureInPictureMessage *input = [FLTPictureInPictureMessage fromMap:message];
+           [api setPictureInPicture: input error:&error];
+           callback(wrapResult(nil, error));
+       }];
+    } else {
+       [channel setMessageHandler:nil];
     }
   }
 }

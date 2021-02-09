@@ -167,23 +167,54 @@ class MixWithOthersMessage {
   }
 }
 
+class PictureInPictureMessage {
+  int textureId;
+  int enabled;
+  double left;
+  double top;
+  double width;
+  double height;
+
+  // ignore: unused_element
+  Map<dynamic, dynamic> _toMap() {
+    final Map<dynamic, dynamic> pigeonMap = <dynamic, dynamic>{};
+    pigeonMap['textureId'] = textureId;
+    pigeonMap['enabled'] = enabled;
+    pigeonMap['left'] = left;
+    pigeonMap['top'] = top;
+    pigeonMap['width'] = width;
+    pigeonMap['height'] = height;
+    return pigeonMap;
+  }
+
+  // ignore: unused_element
+  static PictureInPictureMessage _fromMap(Map<dynamic, dynamic> pigeonMap) {
+    if (pigeonMap == null) {
+      return null;
+    }
+    final PictureInPictureMessage result = PictureInPictureMessage();
+    result.textureId = pigeonMap['textureId'];
+    result.enabled = pigeonMap['enabled'];
+    result.left = pigeonMap['left'];
+    result.top = pigeonMap['top'];
+    result.width = pigeonMap['width'];
+    result.height = pigeonMap['height'];
+    return result;
+  }
+}
+
 class VideoPlayerApi {
   Future<void> initialize() async {
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.initialize', StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.initialize', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(null);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
-      throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       // noop
     }
@@ -191,21 +222,16 @@ class VideoPlayerApi {
 
   Future<TextureMessage> create(CreateMessage arg) async {
     final Map<dynamic, dynamic> requestMap = arg._toMap();
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.create', StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.create', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
-      throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       return TextureMessage._fromMap(replyMap['result']);
     }
@@ -213,21 +239,16 @@ class VideoPlayerApi {
 
   Future<void> dispose(TextureMessage arg) async {
     final Map<dynamic, dynamic> requestMap = arg._toMap();
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.dispose', StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.dispose', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
-      throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       // noop
     }
@@ -235,21 +256,16 @@ class VideoPlayerApi {
 
   Future<void> setLooping(LoopingMessage arg) async {
     final Map<dynamic, dynamic> requestMap = arg._toMap();
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.setLooping', StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.setLooping', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
-      throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       // noop
     }
@@ -257,21 +273,16 @@ class VideoPlayerApi {
 
   Future<void> setVolume(VolumeMessage arg) async {
     final Map<dynamic, dynamic> requestMap = arg._toMap();
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.setVolume', StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.setVolume', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
-      throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       // noop
     }
@@ -279,22 +290,16 @@ class VideoPlayerApi {
 
   Future<void> setPlaybackSpeed(PlaybackSpeedMessage arg) async {
     final Map<dynamic, dynamic> requestMap = arg._toMap();
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.setPlaybackSpeed',
-        StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.setPlaybackSpeed', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
-      throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       // noop
     }
@@ -302,21 +307,16 @@ class VideoPlayerApi {
 
   Future<void> play(TextureMessage arg) async {
     final Map<dynamic, dynamic> requestMap = arg._toMap();
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.play', StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.play', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
-      throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       // noop
     }
@@ -324,21 +324,16 @@ class VideoPlayerApi {
 
   Future<PositionMessage> position(TextureMessage arg) async {
     final Map<dynamic, dynamic> requestMap = arg._toMap();
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.position', StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.position', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
-      throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       return PositionMessage._fromMap(replyMap['result']);
     }
@@ -346,21 +341,16 @@ class VideoPlayerApi {
 
   Future<void> seekTo(PositionMessage arg) async {
     final Map<dynamic, dynamic> requestMap = arg._toMap();
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.seekTo', StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.seekTo', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
-      throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       // noop
     }
@@ -368,21 +358,16 @@ class VideoPlayerApi {
 
   Future<void> pause(TextureMessage arg) async {
     final Map<dynamic, dynamic> requestMap = arg._toMap();
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.pause', StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.pause', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
-      throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       // noop
     }
@@ -390,22 +375,33 @@ class VideoPlayerApi {
 
   Future<void> setMixWithOthers(MixWithOthersMessage arg) async {
     final Map<dynamic, dynamic> requestMap = arg._toMap();
-    const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-        'dev.flutter.pigeon.VideoPlayerApi.setMixWithOthers',
-        StandardMessageCodec());
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.setMixWithOthers', StandardMessageCodec());
 
     final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
     if (replyMap == null) {
       throw PlatformException(
-          code: 'channel-error',
-          message: 'Unable to establish connection on channel.',
-          details: null);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
     } else if (replyMap['error'] != null) {
       final Map<dynamic, dynamic> error = replyMap['error'];
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
+    } else {
+      // noop
+    }
+  }
+
+  Future<void> setPictureInPicture(PictureInPictureMessage arg) async {
+    final Map<dynamic, dynamic> requestMap = arg._toMap();
+    const BasicMessageChannel<dynamic> channel =
+        BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.setPictureInPicture', StandardMessageCodec());
+
+    final Map<dynamic, dynamic> replyMap = await channel.send(requestMap);
+    if (replyMap == null) {
       throw PlatformException(
-          code: error['code'],
-          message: error['message'],
-          details: error['details']);
+          code: 'channel-error', message: 'Unable to establish connection on channel.', details: null);
+    } else if (replyMap['error'] != null) {
+      final Map<dynamic, dynamic> error = replyMap['error'];
+      throw PlatformException(code: error['code'], message: error['message'], details: error['details']);
     } else {
       // noop
     }
@@ -426,126 +422,109 @@ abstract class TestHostVideoPlayerApi {
   void setMixWithOthers(MixWithOthersMessage arg);
   static void setup(TestHostVideoPlayerApi api) {
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.initialize',
-          StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.initialize', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
         api.initialize();
         return <dynamic, dynamic>{};
       });
     }
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.create', StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.create', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
-        final Map<dynamic, dynamic> mapMessage =
-            message as Map<dynamic, dynamic>;
+        final Map<dynamic, dynamic> mapMessage = message as Map<dynamic, dynamic>;
         final CreateMessage input = CreateMessage._fromMap(mapMessage);
         final TextureMessage output = api.create(input);
         return <dynamic, dynamic>{'result': output._toMap()};
       });
     }
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.dispose', StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.dispose', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
-        final Map<dynamic, dynamic> mapMessage =
-            message as Map<dynamic, dynamic>;
+        final Map<dynamic, dynamic> mapMessage = message as Map<dynamic, dynamic>;
         final TextureMessage input = TextureMessage._fromMap(mapMessage);
         api.dispose(input);
         return <dynamic, dynamic>{};
       });
     }
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.setLooping',
-          StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.setLooping', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
-        final Map<dynamic, dynamic> mapMessage =
-            message as Map<dynamic, dynamic>;
+        final Map<dynamic, dynamic> mapMessage = message as Map<dynamic, dynamic>;
         final LoopingMessage input = LoopingMessage._fromMap(mapMessage);
         api.setLooping(input);
         return <dynamic, dynamic>{};
       });
     }
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.setVolume',
-          StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.setVolume', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
-        final Map<dynamic, dynamic> mapMessage =
-            message as Map<dynamic, dynamic>;
+        final Map<dynamic, dynamic> mapMessage = message as Map<dynamic, dynamic>;
         final VolumeMessage input = VolumeMessage._fromMap(mapMessage);
         api.setVolume(input);
         return <dynamic, dynamic>{};
       });
     }
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.setPlaybackSpeed',
-          StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.setPlaybackSpeed', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
-        final Map<dynamic, dynamic> mapMessage =
-            message as Map<dynamic, dynamic>;
-        final PlaybackSpeedMessage input =
-            PlaybackSpeedMessage._fromMap(mapMessage);
+        final Map<dynamic, dynamic> mapMessage = message as Map<dynamic, dynamic>;
+        final PlaybackSpeedMessage input = PlaybackSpeedMessage._fromMap(mapMessage);
         api.setPlaybackSpeed(input);
         return <dynamic, dynamic>{};
       });
     }
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.play', StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.play', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
-        final Map<dynamic, dynamic> mapMessage =
-            message as Map<dynamic, dynamic>;
+        final Map<dynamic, dynamic> mapMessage = message as Map<dynamic, dynamic>;
         final TextureMessage input = TextureMessage._fromMap(mapMessage);
         api.play(input);
         return <dynamic, dynamic>{};
       });
     }
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.position', StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.position', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
-        final Map<dynamic, dynamic> mapMessage =
-            message as Map<dynamic, dynamic>;
+        final Map<dynamic, dynamic> mapMessage = message as Map<dynamic, dynamic>;
         final TextureMessage input = TextureMessage._fromMap(mapMessage);
         final PositionMessage output = api.position(input);
         return <dynamic, dynamic>{'result': output._toMap()};
       });
     }
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.seekTo', StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.seekTo', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
-        final Map<dynamic, dynamic> mapMessage =
-            message as Map<dynamic, dynamic>;
+        final Map<dynamic, dynamic> mapMessage = message as Map<dynamic, dynamic>;
         final PositionMessage input = PositionMessage._fromMap(mapMessage);
         api.seekTo(input);
         return <dynamic, dynamic>{};
       });
     }
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.pause', StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.pause', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
-        final Map<dynamic, dynamic> mapMessage =
-            message as Map<dynamic, dynamic>;
+        final Map<dynamic, dynamic> mapMessage = message as Map<dynamic, dynamic>;
         final TextureMessage input = TextureMessage._fromMap(mapMessage);
         api.pause(input);
         return <dynamic, dynamic>{};
       });
     }
     {
-      const BasicMessageChannel<dynamic> channel = BasicMessageChannel<dynamic>(
-          'dev.flutter.pigeon.VideoPlayerApi.setMixWithOthers',
-          StandardMessageCodec());
+      const BasicMessageChannel<dynamic> channel =
+          BasicMessageChannel<dynamic>('dev.flutter.pigeon.VideoPlayerApi.setMixWithOthers', StandardMessageCodec());
       channel.setMockMessageHandler((dynamic message) async {
-        final Map<dynamic, dynamic> mapMessage =
-            message as Map<dynamic, dynamic>;
-        final MixWithOthersMessage input =
-            MixWithOthersMessage._fromMap(mapMessage);
+        final Map<dynamic, dynamic> mapMessage = message as Map<dynamic, dynamic>;
+        final MixWithOthersMessage input = MixWithOthersMessage._fromMap(mapMessage);
         api.setMixWithOthers(input);
         return <dynamic, dynamic>{};
       });

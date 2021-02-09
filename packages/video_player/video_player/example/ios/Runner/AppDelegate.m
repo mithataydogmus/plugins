@@ -4,6 +4,7 @@
 
 #include "AppDelegate.h"
 #include "GeneratedPluginRegistrant.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation AppDelegate
 
@@ -11,6 +12,10 @@
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [GeneratedPluginRegistrant registerWithRegistry:self];
   // Override point for customization after application launch.
+
+  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+  [[AVAudioSession sharedInstance] setActive: YES error: nil];
+
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
