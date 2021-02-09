@@ -243,7 +243,6 @@ static NSDictionary *wrapResult(NSDictionary *result, FlutterError *error) {
             @"width", (self.height != nil ? self.height : [NSNull null]),
             @"height", nil];
  }
-}
 @end
 
 void FLTVideoPlayerApiSetup(id<FlutterBinaryMessenger> binaryMessenger, id<FLTVideoPlayerApi> api) {
