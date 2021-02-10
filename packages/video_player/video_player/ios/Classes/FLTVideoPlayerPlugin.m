@@ -248,8 +248,6 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
     
     [asset loadValuesAsynchronouslyForKeys:@[ @"tracks" ] completionHandler:assetCompletionHandler];
     
-    [self usePlayerLayer];
-    
     return self;
 }
 
@@ -399,9 +397,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
     _player.rate = speed;
 }
 
-- (void)setPictureInPicture:(BOOL)pictureInPicture
-{
-#if TARGET_OS_IOS
+- (void)setPictureInPicture:(BOOL)pictureInPicture {
     self._pictureInPicture = pictureInPicture;
     if (@available(iOS 9.0, *)) {
         if (_pipController && self._pictureInPicture && ![_pipController isPictureInPictureActive]) {
@@ -414,13 +410,12 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
             });
         } else {
             // Fallback on earlier versions
-        } }
-#endif
+        } 
+    }
 }
 
 #if TARGET_OS_IOS
-- (void)setRestoreUserInterfaceForPIPStopCompletionHandler:(BOOL)restore
-{
+- (void)setRestoreUserInterfaceForPIPStopCompletionHandler:(BOOL)restore {
     if (_restoreUserInterfaceForPIPStopCompletionHandler != NULL) {
         _restoreUserInterfaceForPIPStopCompletionHandler(restore);
         _restoreUserInterfaceForPIPStopCompletionHandler = NULL;
@@ -441,10 +436,8 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
     }
 }
 
-- (void)usePlayerLayer: (CGRect) frame
-{
-    if( _player )
-    {
+- (void)usePlayerLayer: (CGRect) frame {
+    if( _player ) {
         // Create new controller passing reference to the AVPlayerLayer
         self._playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
         UIViewController* vc = [[[UIApplication sharedApplication] keyWindow] rootViewController];
@@ -463,32 +456,31 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
     }
 }
 
-- (void)removePlayerLayer
-{
+- (void)removePlayerLayer {
     [self._playerLayer removeFromSuperlayer];
     self._playerLayer = nil;
 }
 #endif
 
 #if TARGET_OS_IOS
-- (void)pictureInPictureControllerDidStopPictureInPicture:(AVPictureInPictureController *)pictureInPictureController  API_AVAILABLE(ios(9.0)){
+- (void)pictureInPictureControllerDidStopPictureInPicture:(AVPictureInPictureController *)pictureInPictureController API_AVAILABLE(ios(9.0)){
     [self removePlayerLayer];
     if (_eventSink != nil) {
         _eventSink(@{@"event" : @"stoppedPiP"});
     }
 }
 
-- (void)pictureInPictureControllerDidStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController  API_AVAILABLE(ios(9.0)){
+- (void)pictureInPictureControllerDidStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController API_AVAILABLE(ios(9.0)){
     if (_eventSink != nil) {
         _eventSink(@{@"event" : @"startingPiP"});
     }
 }
 
-- (void)pictureInPictureControllerWillStopPictureInPicture:(AVPictureInPictureController *)pictureInPictureController  API_AVAILABLE(ios(9.0)){
+- (void)pictureInPictureControllerWillStopPictureInPicture:(AVPictureInPictureController *)pictureInPictureController API_AVAILABLE(ios(9.0)){
     [self setRestoreUserInterfaceForPIPStopCompletionHandler: true];
 }
 
-- (void)pictureInPictureControllerWillStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
+- (void)pictureInPictureControllerWillStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController API_AVAILABLE(ios(9.0)){
     
 }
 
