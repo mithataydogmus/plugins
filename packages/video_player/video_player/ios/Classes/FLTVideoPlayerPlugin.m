@@ -692,7 +692,10 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 - (void)seekTo:(FLTPositionMessage*)input error:(FlutterError**)error {
     FLTVideoPlayer* player = _players[input.textureId];
     [player seekTo:[input.position intValue]];
-    [player usePlayerLayer: CGRectMake(0, 0, 340, 290)];
+
+    // if (self._pictureInPicture) {
+    //     [player usePlayerLayer: CGRectMake(0, 0, 340, 290)];
+    // }
 }
 
 - (void)pause:(FLTTextureMessage*)input error:(FlutterError**)error {
