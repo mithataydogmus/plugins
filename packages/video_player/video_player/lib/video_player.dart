@@ -437,8 +437,6 @@ class VideoPlayerController extends ValueNotifier<VideoPlayerValue> {
     }
     value = value.copyWith(isShowingPIP: enabled);
     await _videoPlayerPlatform.setPictureInPicture(_textureId, enabled, left, top, width, height);
-    await this.pause();
-    await this.play();
   }
 
   Future<void> _applyPlaybackSpeed() async {
