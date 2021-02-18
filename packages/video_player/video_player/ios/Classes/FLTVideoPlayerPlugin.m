@@ -443,6 +443,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
         UIViewController* vc = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         self._playerLayer.frame = frame;
         self._playerLayer.needsDisplayOnBoundsChange = YES;
+        self._playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
         [vc.view.layer addSublayer:self._playerLayer];
         vc.view.layer.needsDisplayOnBoundsChange = YES;
         if (@available(iOS 9.0, *)) {
